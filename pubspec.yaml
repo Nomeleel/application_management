@@ -1,0 +1,22 @@
+name: application_management
+description: Supports the operation of native applications in the form of plugins.
+version: 0.0.1
+author: Nomeleel
+homepage: https://github.com/Nomeleel/application_management
+
+environment:
+  sdk: ">=2.2.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  platform: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    androidPackage: com.example.application_management
+    pluginClass: ApplicationManagementPlugin
