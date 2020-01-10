@@ -11,7 +11,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
-class ApplicationManagementPlugin(activity: Activity): MethodCallHandler {
+class ApplicationManagementPlugin(activity: Activity) : MethodCallHandler {
 
     private var activity = activity
     private var packageManager: PackageManager
@@ -23,44 +23,49 @@ class ApplicationManagementPlugin(activity: Activity): MethodCallHandler {
     companion object {
         @JvmStatic
         fun registerWith(registrar: Registrar) {
-          val channel = MethodChannel(registrar.messenger(), "application_management")
-          channel.setMethodCallHandler(ApplicationManagementPlugin(registrar.activity()))
+            val channel = MethodChannel(registrar.messenger(), "application_management")
+            channel.setMethodCallHandler(ApplicationManagementPlugin(registrar.activity()))
         }
     }
 
     override fun onMethodCall(call: MethodCall, result: Result) {
-        when(call.method){
-            "openApp" -> result.success(openApp(call.argument<String>("appKey")!!))
+        when (call.method) {
+            "openApp" -> result.success(openApp(call.argument<String>("openKeyStr")!!))
             "openInAppStore" -> result.success(openInAppStore(call.argument<String>("appKey")!!))
             "getInstalledPackageNameList" -> result.success(getInstalledPackageNameList())
-            "isInstalled" -> result.success(isInstalled(call.argument<String>("packageName")!!))
+            "isInstalled" -> result.success(isInstalled(call.argument<String>("appKey")!!))
+            "isInstalledList" -> result.success(isInstalledList(call.argument<List<String>>("appKeyList")!!))
             else -> result.notImplemented()
         }
     }
 
     // TODO remove this annotation, set in config file.
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
-    private fun openApp(appKey: String) : Boolean {
+    private fun openApp(appKey: String): Boolean {
         val intent = packageManager.getLaunchIntentForPackage(appKey)
         if (intent != null) {
             this.activity.startActivity(intent)
-        } else {
-            // TODO open in app store
         }
+
         return true
     }
 
-    private fun openInAppStore(appKey: String) : Boolean {
+    private fun openInAppStore(appKey: String): Boolean {
         return true;
     }
 
-    private fun getInstalledPackageNameList() : List<String> {
+    private fun getInstalledPackageNameList(): List<String> {
         var installAppList = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
-        return installAppList.map<PackageInfo, String>{ it.packageName }
+        return installAppList.map<PackageInfo, String> { it.packageName }
     }
 
-    private fun isInstalled(packageName: String) : Boolean {
-        var installAppList = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES)
-        return installAppList.any(){ it.packageName == packageName }
+    private fun isInstalled(packageName: String): Boolean {
+        var installAppPackageNameList = getInstalledPackageNameList()
+        return installAppPackageNameList.contains(packageName)
+    }
+
+    private fun isInstalledList(packageNameList: List<String>): List<Boolean> {
+        var installAppPackageNameList = getInstalledPackageNameList();
+        return packageNameList.map<String, Boolean> { installAppPackageNameList.contains(it) }
     }
 }
