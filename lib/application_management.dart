@@ -22,6 +22,24 @@ void openInAppStore(String appKey) async {
   await _channel.invokeMethod('openInAppStore', argumentMap);
 }
 
+/// Open the details page for the app in the Specify [Market].
+/// The [packageName] is package name for [Android].
+/// If Specify [Market] does not exist, the details page
+/// for the specify [Market] will open in the system default app store.
+void openInSpecifyAppStore(String packageName,
+    String specifyAppStorePackageName, String specifyAppStoreClassName) async {
+  if (_platform.isIOS) {
+    throw UnsupportedError('Functionality not support on Ios');
+  }
+
+  Map<String, Object> argumentMap = {
+    "packageName": packageName,
+    "specifyAppStorePackageName": specifyAppStorePackageName,
+    "specifyAppStoreClassName": specifyAppStoreClassName,
+  };
+  await _channel.invokeMethod('openInSpecifyAppStore', argumentMap);
+}
+
 /// For [Android] can get current device installed all app list.
 /// This will only get app [package name] list.
 Future<List<String>> getInstalledPackageNameList() async {

@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     _controller = TextEditingController();
+    _controller.text = 'com.android.chrome';
   }
 
   @override
@@ -37,7 +38,9 @@ class _MyAppState extends State<MyApp> {
               RaisedButton(
                 child: Text('Test'),
                 onPressed: () {
-                    openApp(_controller.text);
+                    //openApp(_controller.text);
+                    openInSpecifyAppStore(_controller.text, "com.tencent.android.qqdownloader",
+                      "com.tencent.pangu.link.LinkProxyActivity");
                 },
               ),
               Text('result: $_result\n'),
