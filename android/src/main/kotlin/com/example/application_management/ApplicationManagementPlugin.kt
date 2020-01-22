@@ -41,7 +41,7 @@ class ApplicationManagementPlugin(activity: Activity) : MethodCallHandler {
                     call.argument<String>("specifyAppStoreClassName")!!))
             "getInstalledPackageNameList" -> result.success(getInstalledPackageNameList())
             "isInstalled" -> result.success(isInstalled(call.argument<String>("appKey")!!))
-            "isInstalledList" -> result.success(isInstalledList(call.argument<List<String>>("appKeyList")!!))
+            "isInstalledMap" -> result.success(isInstalledMap(call.argument<List<String>>("appKeyList")!!))
             else -> result.notImplemented()
         }
     }
@@ -89,8 +89,12 @@ class ApplicationManagementPlugin(activity: Activity) : MethodCallHandler {
         return installAppPackageNameList.contains(packageName)
     }
 
-    private fun isInstalledList(packageNameList: List<String>): List<Boolean> {
+    private fun isInstalledMap(packageNameList: List<String>): Map<String, Boolean> {
         var installAppPackageNameList = getInstalledPackageNameList();
-        return packageNameList.map<String, Boolean> { installAppPackageNameList.contains(it) }
+        var installAppPackageNameMap = mutableMapOf<String, Boolean>()
+        packageNameList.forEach {
+            installAppPackageNameMap[it] = installAppPackageNameList.contains(it)
+        }
+        return installAppPackageNameMap
     }
 }

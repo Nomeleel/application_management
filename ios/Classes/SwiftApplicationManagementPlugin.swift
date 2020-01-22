@@ -19,7 +19,7 @@ public class SwiftApplicationManagementPlugin: NSObject, FlutterPlugin {
             case "isInstalled":
                 result(isInstalled(urlScheme: call.value(forKey: "appKey") as! String))
                 break
-            case "isInstalledList":
+            case "isInstalledMap":
                 result(isInstalledMap(urlSchemeList: call.value(forKey: "appKeyList") as! Dictionary<String, Bool>))
                 break
             default:

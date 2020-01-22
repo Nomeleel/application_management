@@ -59,18 +59,18 @@ Future<List<String>> getInstalledPackageNameList() async {
 Future<bool> isInstalled(String appKey) async {
   Map<String, Object> argumentMap = {"appKey": appKey};
 
-  final bool isInstalled = await _channel.invokeMethod<bool>('isInstalled');
+  final bool isInstalled = await _channel.invokeMethod<bool>('isInstalled', argumentMap);
 
   return isInstalled;
 }
 
 /// Can use this method if you want to check if multiple apps are installed at once.
 /// For more information, see [isInstalled] function.
-Future<List<bool>> isInstalledList(List<String> appKeyList) async {
+Future<Map<String, bool>> isInstalledList(List<String> appKeyList) async {
   Map<String, Object> argumentMap = {"appKeyList": appKeyList};
 
-  final List<bool> isInstalledList =
-      await _channel.invokeListMethod<bool>('isInstalledList');
+  final Map<String, bool> isInstalledMap =
+      await _channel.invokeMapMethod<String, bool>('isInstalledMap', argumentMap);
 
-  return isInstalledList;
+  return isInstalledMap;
 }
