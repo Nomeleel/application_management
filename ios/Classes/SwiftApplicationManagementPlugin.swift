@@ -20,7 +20,7 @@ public class SwiftApplicationManagementPlugin: NSObject, FlutterPlugin {
                 result(isInstalled(urlScheme: call.value(forKey: "appKey") as! String))
                 break
             case "isInstalledMap":
-                result(isInstalledMap(urlSchemeList: call.value(forKey: "appKeyList") as! Dictionary<String, Bool>))
+                result(isInstalledMap(urlSchemeList: call.value(forKey: "appKeyList") as! Array<String>))
                 break
             default:
                 result(nil)
@@ -31,12 +31,15 @@ public class SwiftApplicationManagementPlugin: NSObject, FlutterPlugin {
         let urlSchemeURL = URL(string: urlScheme)!
         if UIApplication.shared.canOpenURL(urlSchemeURL)
         {
-            UIApplication.shared.open(urlSchemeURL)
+            if #available(iOS 10.0, *)
+            {
+                UIApplication.shared.open(urlSchemeURL)
+            }
         }
     }
     
     private func openInAppStore(bundleId: String){
-        openApp("itms-apps://apps.apple.com/cn/app/id" + bundleId)
+        openApp(urlScheme: "itms-apps://apps.apple.com/cn/app/id\(bundleId)")
     }
     
     private func isInstalled(urlScheme: String) -> Bool {
@@ -47,7 +50,7 @@ public class SwiftApplicationManagementPlugin: NSObject, FlutterPlugin {
     private func isInstalledMap(urlSchemeList: Array<String>) -> Dictionary<String, Bool> {
         var isInstalledMap: [String: Bool] = [:]
         urlSchemeList.forEach { item in
-            isInstalledMap[item] = isInstalled(item)
+            isInstalledMap[item] = isInstalled(urlScheme: item)
         }
         return isInstalledMap
     }
