@@ -11,15 +11,13 @@ const Platform _platform = const LocalPlatform();
 /// Open other app with special strings.
 /// The [openKeyStr] for [Android] is package name, for [Ios] is url scheme.
 void openApp(String openKeyStr) {
-  Map<String, Object> argumentMap = {"openKeyStr": openKeyStr};
-  _channel.invokeMethod('openApp', argumentMap);
+  _channel.invokeMethod('openApp', openKeyStr);
 }
 
 /// Open the details page for the app in the [App Store] or [Market].
 /// The [appKey] for [Android] is package name, for [Ios] is bundle id.
 void openInAppStore(String appKey) async {
-  Map<String, Object> argumentMap = {"appKey": appKey};
-  await _channel.invokeMethod('openInAppStore', argumentMap);
+  await _channel.invokeMethod('openInAppStore', appKey);
 }
 
 /// Open the details page for the app in the Specify [Market].
@@ -57,20 +55,16 @@ Future<List<String>> getInstalledPackageNameList() async {
 /// The [appKey] for [Android] is package name.
 /// Note: for [Ios] is url scheme.
 Future<bool> isInstalled(String appKey) async {
-  Map<String, Object> argumentMap = {"appKey": appKey};
-
-  final bool isInstalled = await _channel.invokeMethod<bool>('isInstalled', argumentMap);
+  final bool isInstalled = await _channel.invokeMethod<bool>('isInstalled', appKey);
 
   return isInstalled;
 }
 
 /// Can use this method if you want to check if multiple apps are installed at once.
 /// For more information, see [isInstalled] function.
-Future<Map<String, bool>> isInstalledList(List<String> appKeyList) async {
-  Map<String, Object> argumentMap = {"appKeyList": appKeyList};
-
+Future<Map<String, bool>> isInstalledMap(List<String> appKeyList) async {
   final Map<String, bool> isInstalledMap =
-      await _channel.invokeMapMethod<String, bool>('isInstalledMap', argumentMap);
+      await _channel.invokeMapMethod<String, bool>('isInstalledMap', appKeyList);
 
   return isInstalledMap;
 }

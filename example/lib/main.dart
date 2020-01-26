@@ -37,10 +37,22 @@ class _MyAppState extends State<MyApp> {
               ),
               RaisedButton(
                 child: Text('Test'),
-                onPressed: () {
-                    //openApp(_controller.text);
-                    openInSpecifyAppStore(_controller.text, "com.tencent.android.qqdownloader",
-                      "com.tencent.pangu.link.LinkProxyActivity");
+                onPressed: () async {
+                  // android test.
+                  //openApp(_controller.text);
+                  //openInSpecifyAppStore(_controller.text, "com.tencent.android.qqdownloader",
+                    //"com.tencent.pangu.link.LinkProxyActivity");
+                  // weixin bundle id.
+
+                  // ios test.
+                  //openApp('weixin://');
+                  //openInAppStore('414478124');
+                  // var isAppInstalled = await isInstalled('weixin://');
+                  // print(isAppInstalled);
+                  // var isAppListInstalledMap = await isInstalledMap(['weixin://', 'test://', 'tenvideo://']);
+                  // isAppListInstalledMap.forEach((key, value) {
+                  //   print('key: $key value: $value');
+                  // });
                 },
               ),
               Text('result: $_result\n'),

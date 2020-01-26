@@ -11,16 +11,16 @@ public class SwiftApplicationManagementPlugin: NSObject, FlutterPlugin {
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
             case "openApp":
-                result(openApp(urlScheme: call.value(forKey: "openKeyStr") as! String))
+                result(openApp(urlScheme: call.arguments as! String))
                 break
             case "openInAppStore":
-                result(openInAppStore(bundleId: call.value(forKey: "appKey") as! String))
+                result(openInAppStore(bundleId: call.arguments as! String))
                 break
             case "isInstalled":
-                result(isInstalled(urlScheme: call.value(forKey: "appKey") as! String))
+                result(isInstalled(urlScheme: call.arguments as! String))
                 break
             case "isInstalledMap":
-                result(isInstalledMap(urlSchemeList: call.value(forKey: "appKeyList") as! Array<String>))
+                result(isInstalledMap(urlSchemeList: call.arguments as! Array<String>))
                 break
             default:
                 result(nil)
@@ -44,7 +44,8 @@ public class SwiftApplicationManagementPlugin: NSObject, FlutterPlugin {
     
     private func isInstalled(urlScheme: String) -> Bool {
         let urlSchemeURL = URL(string: urlScheme)!
-        return UIApplication.shared.canOpenURL(urlSchemeURL)
+        guard let result = try? UIApplication.shared.canOpenURL(urlSchemeURL) else {return false}
+        return result
     }
     
     private func isInstalledMap(urlSchemeList: Array<String>) -> Dictionary<String, Bool> {

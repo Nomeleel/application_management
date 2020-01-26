@@ -18,8 +18,5 @@ dev_dependencies:
 
 flutter:
   plugin:
-    android:
-      Package: com.example.application_management
-      pluginClass: ApplicationManagementPlugin
-    ios:
-      pluginClass: ApplicationManagementPlugin
+    androidPackage: com.example.application_management
+    pluginClass: ApplicationManagementPlugin
