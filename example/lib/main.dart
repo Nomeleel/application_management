@@ -40,12 +40,23 @@ class _MyAppState extends State<MyApp> {
                 onPressed: () async {
                   // android test.
                   //openApp(_controller.text);
+                  //openInAppStore(_controller.text);
                   //openInSpecifyAppStore(_controller.text, "com.tencent.android.qqdownloader",
                     //"com.tencent.pangu.link.LinkProxyActivity");
-                  // weixin bundle id.
+                  //var list = await getInstalledPackageNameList();
+                  //list.forEach((item){
+                    //print(item);
+                  //});
+                  // var isAppInstalled = await isInstalled(_controller.text);
+                  // print(isAppInstalled);
+                  // var isAppListInstalledMap = await isInstalledMap([_controller.text, 'test', 'com.tencent.qqlive']);
+                  // isAppListInstalledMap.forEach((key, value) {
+                  //   print('key: $key value: $value');
+                  // });
 
                   // ios test.
                   //openApp('weixin://');
+                  // weixin bundle id.
                   //openInAppStore('414478124');
                   // var isAppInstalled = await isInstalled('weixin://');
                   // print(isAppInstalled);

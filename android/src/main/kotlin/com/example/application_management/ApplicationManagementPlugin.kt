@@ -33,15 +33,15 @@ class ApplicationManagementPlugin(activity: Activity) : MethodCallHandler {
 
     override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
-            "openApp" -> result.success(openApp(call.argument<String>("openKeyStr")!!))
-            "openInAppStore" -> result.success(openInAppStore(call.argument<String>("appKey")!!))
+            "openApp" -> result.success(openApp(call.arguments as String))
+            "openInAppStore" -> result.success(openInAppStore(call.arguments as String))
             "openInSpecifyAppStore" -> result.success(openInSpecifyAppStore(
                     call.argument<String>("packageName")!!,
                     call.argument<String>("specifyAppStorePackageName")!!,
                     call.argument<String>("specifyAppStoreClassName")!!))
             "getInstalledPackageNameList" -> result.success(getInstalledPackageNameList())
-            "isInstalled" -> result.success(isInstalled(call.argument<String>("appKey")!!))
-            "isInstalledMap" -> result.success(isInstalledMap(call.argument<List<String>>("appKeyList")!!))
+            "isInstalled" -> result.success(isInstalled(call.arguments as String))
+            "isInstalledMap" -> result.success(isInstalledMap(call.arguments as List<String>))
             else -> result.notImplemented()
         }
     }
