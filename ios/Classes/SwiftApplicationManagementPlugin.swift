@@ -44,8 +44,9 @@ public class SwiftApplicationManagementPlugin: NSObject, FlutterPlugin {
     
     private func isInstalled(urlScheme: String) -> Bool {
         let urlSchemeURL = URL(string: urlScheme)!
-        guard let result = try? UIApplication.shared.canOpenURL(urlSchemeURL) else {return false}
-        return result
+        //guard let result = try? UIApplication.shared.canOpenURL(urlSchemeURL) else {return false}
+        //return result
+        return UIApplication.shared.canOpenURL(urlSchemeURL)
     }
     
     private func isInstalledMap(urlSchemeList: Array<String>) -> Dictionary<String, Bool> {
