@@ -49,12 +49,14 @@ class ApplicationManagementPlugin(activity: Activity) : MethodCallHandler {
     // TODO remove this annotation, set in config file.
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
     private fun openApp(packageName: String): Boolean {
+        var isOpenApp = false
         val intent = packageManager.getLaunchIntentForPackage(packageName)
         if (intent != null) {
             this.activity.startActivity(intent)
+            isOpenApp = true
         }
 
-        return true
+        return isOpenApp
     }
 
     private fun openInAppStore(packageName: String): Boolean {
@@ -62,7 +64,7 @@ class ApplicationManagementPlugin(activity: Activity) : MethodCallHandler {
         val marketIntent = Intent(Intent.ACTION_VIEW, uri)
         marketIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         this.activity.startActivity(marketIntent)
-        return true;
+        return true
     }
 
     private fun openInSpecifyAppStore(packageName: String, specifyAppStorePackageName: String,
@@ -76,7 +78,7 @@ class ApplicationManagementPlugin(activity: Activity) : MethodCallHandler {
         }
         marketIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         this.activity.startActivity(marketIntent)
-        return true;
+        return true
     }
 
     private fun getInstalledPackageNameList(): List<String> {

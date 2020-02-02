@@ -27,19 +27,23 @@ public class SwiftApplicationManagementPlugin: NSObject, FlutterPlugin {
         }
     }
     
-    private func openApp(urlScheme: String){
+    private func openApp(urlScheme: String) -> Bool {
+        var isOpenApp = false
         let urlSchemeURL = URL(string: urlScheme)!
         if UIApplication.shared.canOpenURL(urlSchemeURL)
         {
             if #available(iOS 10.0, *)
             {
                 UIApplication.shared.open(urlSchemeURL)
+                isOpenApp = true
             }
         }
+
+        return isOpenApp
     }
     
-    private func openInAppStore(bundleId: String){
-        openApp(urlScheme: "itms-apps://apps.apple.com/cn/app/id\(bundleId)")
+    private func openInAppStore(bundleId: String) -> Bool {
+        return openApp(urlScheme: "itms-apps://apps.apple.com/cn/app/id\(bundleId)")
     }
     
     private func isInstalled(urlScheme: String) -> Bool {

@@ -10,21 +10,31 @@ const Platform _platform = const LocalPlatform();
 
 /// Open other app with special strings.
 /// The [openKeyStr] for [Android] is package name, for [Ios] is url scheme.
-void openApp(String openKeyStr) {
-  _channel.invokeMethod('openApp', openKeyStr);
+Future<bool> openApp(String openKeyStr) async {
+  if (openKeyStr == null || openKeyStr.isEmpty) {
+    return false;
+  }
+
+  final bool isOpenApp = await _channel.invokeMethod('openApp', openKeyStr);
+  return isOpenApp;
 }
 
 /// Open the details page for the app in the [App Store] or [Market].
 /// The [appKey] for [Android] is package name, for [Ios] is bundle id.
-void openInAppStore(String appKey) async {
-  await _channel.invokeMethod('openInAppStore', appKey);
+Future<bool> openInAppStore(String appKey) async {
+  if (appKey == null || appKey.isEmpty) {
+    return false;
+  }
+
+  final bool isOpenInAppStore = await _channel.invokeMethod('openInAppStore', appKey);
+  return isOpenInAppStore;
 }
 
 /// Open the details page for the app in the Specify [Market].
 /// The [packageName] is package name for [Android].
 /// If Specify [Market] does not exist, the details page
 /// for the specify [Market] will open in the system default app store.
-void openInSpecifyAppStore(String packageName,
+Future<bool> openInSpecifyAppStore(String packageName,
     String specifyAppStorePackageName, String specifyAppStoreClassName) async {
   if (_platform.isIOS) {
     throw UnsupportedError('Functionality not support on Ios');
@@ -35,7 +45,8 @@ void openInSpecifyAppStore(String packageName,
     "specifyAppStorePackageName": specifyAppStorePackageName,
     "specifyAppStoreClassName": specifyAppStoreClassName,
   };
-  await _channel.invokeMethod('openInSpecifyAppStore', argumentMap);
+  final bool isOpenInSpecifyAppStore = await _channel.invokeMethod('openInSpecifyAppStore', argumentMap);
+  return isOpenInSpecifyAppStore;
 }
 
 /// For [Android] can get current device installed all app list.
@@ -55,6 +66,10 @@ Future<List<String>> getInstalledPackageNameList() async {
 /// The [appKey] for [Android] is package name.
 /// Note: for [Ios] is url scheme.
 Future<bool> isInstalled(String appKey) async {
+  if (appKey == null || appKey.isEmpty) {
+    return false;
+  }
+
   final bool isInstalled = await _channel.invokeMethod<bool>('isInstalled', appKey);
 
   return isInstalled;
