@@ -1,4 +1,4 @@
-package com.example.application_management
+package com.applicationManagement.plugin
 
 import android.annotation.TargetApi
 import android.app.Activity
