@@ -2,11 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:platform/platform.dart';
 
 const MethodChannel _channel = MethodChannel('application_management');
-
-const Platform _platform = const LocalPlatform();
 
 /// Open other app with special strings.
 /// The [openKeyStr] for [Android] is package name, for [Ios] is url scheme.
@@ -36,7 +33,7 @@ Future<bool> openInAppStore(String appKey) async {
 /// for the specify [Market] will open in the system default app store.
 Future<bool> openInSpecifyAppStore(String packageName,
     String specifyAppStorePackageName, String specifyAppStoreClassName) async {
-  if (_platform.isIOS) {
+  if (Platform.isIOS) {
     throw UnsupportedError('Functionality not support on Ios');
   }
 
@@ -52,7 +49,7 @@ Future<bool> openInSpecifyAppStore(String packageName,
 /// For [Android] can get current device installed all app list.
 /// This will only get app [package name] list.
 Future<List<String>> getInstalledPackageNameList() async {
-  if (_platform.isIOS) {
+  if (Platform.isIOS) {
     throw UnsupportedError('Functionality not support on Ios');
   }
 
