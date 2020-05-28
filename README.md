@@ -1,7 +1,8 @@
 # Application Management
 
-Supports the operation of native applications in the form of plugins.
+[![Pub Package](https://img.shields.io/pub/v/application_management.svg)](https://pub.dev/packages/application_management) [![Support Platforms](https://img.shields.io/badge/flutter-android%20%7C%20ios-green.svg)](https://github.com/Nomeleel/application_management) [![Flutter Sample](https://img.shields.io/badge/flutter-sample-purple.svg)](https://github.com/Nomeleel/wang_card_assistant) [![Star on GitHub](https://img.shields.io/github/stars/Nomeleel/application_management.svg?style=flat&logo=github&colorB=deeppink&label=stars)](https://github.com/Nomeleel/application_management)
 
+Supports the operation of native applications in the form of plugins.
 
 ## Features now supported
 
