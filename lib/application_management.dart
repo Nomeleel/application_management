@@ -37,10 +37,10 @@ Future<bool> openInSpecifyAppStore(String packageName,
     throw UnsupportedError('Functionality not support on Ios');
   }
 
-  Map<String, Object> argumentMap = {
-    "packageName": packageName,
-    "specifyAppStorePackageName": specifyAppStorePackageName,
-    "specifyAppStoreClassName": specifyAppStoreClassName,
+  final Map<String, String> argumentMap = <String, String> {
+    'packageName': packageName,
+    'specifyAppStorePackageName': specifyAppStorePackageName,
+    'specifyAppStoreClassName': specifyAppStoreClassName,
   };
   final bool isOpenInSpecifyAppStore = await _channel.invokeMethod('openInSpecifyAppStore', argumentMap);
   return isOpenInSpecifyAppStore;

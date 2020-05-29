@@ -13,8 +13,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   TextEditingController _controller;
 
-  bool _result = false;
-
   @override
   void initState() {
     super.initState();
@@ -37,7 +35,7 @@ class _MyAppState extends State<MyApp> {
                 controller: _controller,
               ),
               RaisedButton(
-                child: Text('Test'),
+                child: const Text('Test'),
                 onPressed: () async {
                   // android test.
                   if (Platform.isAndroid) {
@@ -45,19 +43,18 @@ class _MyAppState extends State<MyApp> {
 
                     openInAppStore(_controller.text);
 
-                    openInSpecifyAppStore(_controller.text, "com.tencent.android.qqdownloader",
-                      "com.tencent.pangu.link.LinkProxyActivity");
+                    openInSpecifyAppStore(_controller.text, 'com.tencent.android.qqdownloader',
+                      'com.tencent.pangu.link.LinkProxyActivity');
 
-                    var list = await getInstalledPackageNameList();
-                    list.forEach((item){
-                      print(item);
-                    });
+                    final List<String> list = await getInstalledPackageNameList();
+                    list.forEach(print);
 
-                    var isAppInstalled = await isInstalled(_controller.text);
+                    final bool isAppInstalled = await isInstalled(_controller.text);
                     print(isAppInstalled);
 
-                    var isAppListInstalledMap = await isInstalledMap([_controller.text, 'test', 'com.tencent.qqlive']);
-                    isAppListInstalledMap.forEach((key, value) {
+                    final Map<String, bool> isAppListInstalledMap = await isInstalledMap(
+                      <String> [_controller.text, 'test', 'com.tencent.qqlive']);
+                    isAppListInstalledMap.forEach((String key, bool value) {
                       print('key: $key value: $value');
                     });
                   } 
@@ -68,11 +65,12 @@ class _MyAppState extends State<MyApp> {
                     // weixin bundle id.
                     openInAppStore('414478124');
 
-                    var isAppInstalled = await isInstalled('weixin://');
+                    final bool isAppInstalled = await isInstalled('weixin://');
                     print(isAppInstalled);
                     
-                    var isAppListInstalledMap = await isInstalledMap(['weixin://', 'test://', 'tenvideo://']);
-                    isAppListInstalledMap.forEach((key, value) {
+                    final Map<String, bool> isAppListInstalledMap = await isInstalledMap(
+                      <String> ['weixin://', 'test://', 'tenvideo://']);
+                    isAppListInstalledMap.forEach((String key, bool value) {
                       print('key: $key value: $value');
                     });
                   }
@@ -81,7 +79,6 @@ class _MyAppState extends State<MyApp> {
                   }
                 },
               ),
-              Text('result: $_result\n'),
             ],
           ),
         ),
