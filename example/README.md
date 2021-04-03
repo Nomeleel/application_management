@@ -1,6 +1,6 @@
-# application_management_example
+# example
 
-Demonstrates how to use the application_management plugin.
+A new Flutter project.
 
 ## Getting Started
 

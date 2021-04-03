@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
               TextField(
                 controller: _controller,
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: const Text('Test'),
                 onPressed: () async {
                   // android test.
