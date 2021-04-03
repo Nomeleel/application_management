@@ -23,7 +23,7 @@ How to use this library.
 
 Add this to your package's **pubspec.yaml** file:
 
-```
+```yaml
 // by git
 dependencies:
   application_management:
@@ -42,7 +42,7 @@ After the first step is saved, the library will be obtained automatically, or yo
 
 with Flutter:
 
-```
+```dart
 flutter pub get
 ```
 
@@ -50,13 +50,13 @@ flutter pub get
 
 Now in your Dart code, you can use:
 
-```
+```dart
 import 'package:application_management/application_management.dart';
 ```
 
 ### 4. Use it
 
-```
+```dart
 RaisedButton(
     child: Text('Open'),
     onPressed: () {
@@ -86,7 +86,7 @@ project_name\ios\Runner\Info.plist
 
 2. Add url scheme list to this file.
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -106,7 +106,7 @@ project_name\ios\Runner\Info.plist
 
 3. Add ': \/\/' suffix when using.
 
-```
+```dart
 // only for ios.
 openApp("weixin://");
 isInstalled("tenvideo://");
